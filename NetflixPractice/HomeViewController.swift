@@ -113,7 +113,7 @@ class HomeViewController: UIViewController {
     
     // 4개의 이미지 뷰에 중복없이 랜덤 이미지 넣기
     func makeRandomImage() {
-        var tempImageList: [UIImage] = []
+        var tempImageList = Set<UIImage>()
         
         let imageViews: [UIImageView] = [
             mainImageView,
@@ -127,19 +127,18 @@ class HomeViewController: UIViewController {
             while tempImageList.contains(randomImage) {
                 randomImage = self.imageList.randomElement()!
             }
-            tempImageList.append(randomImage)
+            tempImageList.insert(randomImage)
             $0.image = randomImage
         }
     }
     
-    // MARK: - 재생 버튼을 클릭했을 때 4개의 이미지(포스터)가 랜덤으로 변경되도록 구현해보세요.
     
-    // MARK: - 재생 버튼을 클릭했을 때 아래 3개의 이미지뷰에 Top10 / 지금 시청하기 / 새로운 에피소드 요소가 랜덤으로 보이거나 사라지게 설정해보세요. (위치가 일정하지 않아도 괜찮습니다)
-    
+    // 재생 버튼 클릭
     @IBAction func playButtonTapped(_ sender: UIButton) {
-        
+        // 1. 4개의 이미지(포스터)가 랜덤으로 변경
         makeRandomImage()
         
+        // 2. 아래 3개의 이미지뷰에 Netflix Logo / Top10가 랜덤으로 보이거나 사라지게 설정
         let subImageViews: [UIImageView] = [
             firstLogoImageView,
             firstTop10ImageView,
